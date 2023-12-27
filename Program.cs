@@ -2,7 +2,8 @@
 {
     internal class Program
     {
-        static List<double> resultatHistorik = new List<double>();
+        static List<string> uträkningsHistorik = new List<string>();
+
         static void Main(string[] args)
         {
             Console.WriteLine("============================");
@@ -35,9 +36,11 @@
                 }
 
                 double resultat = KalkylatorUträkning(tal1, tal2, matteOperator);
-                resultatHistorik.Add(resultat);
 
-                Console.WriteLine($"{tal1} {matteOperator} {tal2} = {resultat}");
+                string uträkning = $"{tal1} {matteOperator} {tal2} = {resultat}";
+                uträkningsHistorik.Add(uträkning);
+
+                Console.WriteLine(uträkning);
                 Console.WriteLine();
 
                 Console.WriteLine("Vill du se tidigare resultat? (ja/nej)");
@@ -80,9 +83,9 @@
         static void VisaResultat()
         {
             Console.WriteLine("Tidigare resultat: ");
-            foreach (double result in resultatHistorik)
+            foreach (string uträkning in uträkningsHistorik)
             {
-                Console.WriteLine(result);
+                Console.WriteLine(uträkning);
             }
         }
 
