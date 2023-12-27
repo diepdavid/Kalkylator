@@ -1,10 +1,13 @@
-﻿namespace Kalkylator
-{
-    internal class Program
-    {
-        static List<string> uträkningsHistorik = new List<string>();
+﻿using System;
+using System.Collections.Generic;
 
-        static void Main(string[] args)
+namespace Kalkylator
+{
+    class Kalkylatorn
+    {
+        private List<string> uträkningsHistorik = new List<string>();
+
+        public void KörKalkylatorn()
         {
             Console.WriteLine("============================");
             Console.WriteLine("Välkommen till Kalkylatorn!");
@@ -36,11 +39,9 @@
                 }
 
                 double resultat = KalkylatorUträkning(tal1, tal2, matteOperator);
+                läggTillHistorik(tal1, tal2, matteOperator, resultat);
 
-                string uträkning = $"{tal1} {matteOperator} {tal2} = {resultat}";
-                uträkningsHistorik.Add(uträkning);
-
-                Console.WriteLine(uträkning);
+                Console.WriteLine($"{tal1} {matteOperator} {tal2} = {resultat}");
                 Console.WriteLine();
 
                 Console.WriteLine("Vill du se tidigare resultat? (ja/nej)");
@@ -61,8 +62,7 @@
                 }
             }
         }
-
-        static double KalkylatorUträkning(double tal1, double tal2, char mathOperator)
+        private double KalkylatorUträkning(double tal1, double tal2, char mathOperator)
         {
             switch (mathOperator)
             {
@@ -80,7 +80,13 @@
             }
         }
 
-        static void VisaResultat()
+        private void läggTillHistorik(double tal1, double tal2, char matteOperator, double resultat)
+        {
+            string uträkning = $"{tal1} {matteOperator} {tal2} = {resultat}";
+            uträkningsHistorik.Add(uträkning);
+        }
+
+        private void VisaResultat()
         {
             Console.WriteLine("Tidigare resultat: ");
             foreach (string uträkning in uträkningsHistorik)
@@ -88,6 +94,14 @@
                 Console.WriteLine(uträkning);
             }
         }
+    }
 
+    internal class Program
+    {
+        static void Main(string[] args)
+        {
+            Kalkylatorn kalkylator = new Kalkylatorn();
+            kalkylator.KörKalkylatorn();
+        }
     }
 }
